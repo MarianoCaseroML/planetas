@@ -38,7 +38,7 @@ func inicializarPlanetas () {
 	Sol.Sentido = 0
 }
 
-func CreateDBifNotExists() {
+func CrearBaseSiNoExiste() {
 	if (!db.CheckExistsBucket()) {
 		log.Println("Regenerando....")
 		RegenerarBase()
@@ -127,25 +127,26 @@ func generarDia (dataBase *bolt.DB ,dia int) {
 		if (mathCalcs.ElSolTambienEstaAlineado(Betasoide, Vulcano, Ferengi, Sol)) {
 			//Sequia
 			//storeData(dataBase, dia, entity.TipoClima(entity.Sequia), 0)
-			storeData(dataBase, dia, entity.Sequia, 0)
+			grabarDatos(dataBase, dia, entity.Sequia, 0)
 		} else {
 			//CondicionesOptimas
-			storeData(dataBase, dia, entity.Optimo, 0)
+			grabarDatos(dataBase, dia, entity.Optimo, 0)
 		}
 	} else { //hay triangulo
 		//calculo el perimetro del triangulo para saber cuando es el mas grande
 		perimetroTriangulo := mathCalcs.PerimetroTriangulo(Vulcano, Ferengi, Betasoide)
 		if (mathCalcs.ElSolEstaEnMedioDelTriagulo(Betasoide, Vulcano, Ferengi, Sol)) {
 			//Luvia
-			storeData(dataBase, dia, entity.Lluvia, perimetroTriangulo)
+			grabarDatos(dataBase, dia, entity.Lluvia, perimetroTriangulo)
 		} else {
 			//NoLlueve
-			storeData(dataBase, dia, entity.NoLluvia, perimetroTriangulo)
+			grabarDatos(dataBase, dia, entity.NoLluvia, perimetroTriangulo)
 		}
 	}
 }
 
-func storeData (dataBase *bolt.DB, dia int, tipoClima string, perimetro float64) error {
+//Grabo datos en la base
+func grabarDatos (dataBase *bolt.DB, dia int, tipoClima string, perimetro float64) error {
 
 	//Paso el dia a int para usarlo como key
 	var s string = strconv.Itoa(dia)

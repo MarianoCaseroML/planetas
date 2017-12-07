@@ -21,11 +21,12 @@ type Service struct {
 func (service *Service) Start() {
 	//new router
 	router := mux.NewRouter()
+
 	//registro APIs en router
-	registerRoutes(router)
+	registrarRutas(router)
 
 	//Cuando inicio verifico si la base existe, si no existe la creo
-	server.CreateDBifNotExists()
+	server.CrearBaseSiNoExiste()
 
 	log.Println("Listening on port " + serverPort)
 	//inicio server
@@ -39,7 +40,7 @@ const clima ="/api/1/clima"
 const periodo = "/api/1/periodo"
 
 //registro APIs
-func registerRoutes(router *mux.Router) {
+func registrarRutas(router *mux.Router) {
 
 	//get para healthCheck para saber si estoy vivo
 	router.Path("/health").Methods("GET").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -48,7 +49,7 @@ func registerRoutes(router *mux.Router) {
 	})
 
 	//regenerarDB
-	router.Path(regenerarDB).Methods("GET").HandlerFunc(RecreateDB)
+	router.Path(regenerarDB).Methods("GET").HandlerFunc(RecrearDB)
 	//Consulta de clima por dia
 	router.Path(clima).Methods("GET").HandlerFunc(ConsultaClimaPorDia)
 	//Consulta por periodo de clima
@@ -62,7 +63,7 @@ func registerRoutes(router *mux.Router) {
 
 }
 
-func RecreateDB(w http.ResponseWriter, r *http.Request) {
+func RecrearDB(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	server.RegenerarBase()
 	w.Write([]byte(`{ "status": "ok" }`))

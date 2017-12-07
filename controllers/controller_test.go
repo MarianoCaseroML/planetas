@@ -28,7 +28,7 @@ func TestRegenerarDB(t *testing.T) {
 
 	//me guardo el resultado
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(RecreateDB)
+	handler := http.HandlerFunc(RecrearDB)
 
 	handler.ServeHTTP(rr, req)
 
