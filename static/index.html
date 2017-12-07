@@ -1,0 +1,100 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Mariano Casero - Examen</title><script type="text/javascript">
+//<![CDATA[
+window.__cfRocketOptions = {byc:0,p:0,petok:"32684e3ae60fc221a8b0d55688018e936b35e5d0-1512623486-1800"};
+//]]>
+</script>
+<script type="text/javascript" src="https://ajax.cloudflare.com/cdn-cgi/scripts/ddc5a536/cloudflare-static/rocket.min.js"></script>
+<style></style></head><body id="preview">
+<h1><a id="Examen_ML_0"></a>Examen ML</h1>
+<p>Mariano Casero</p>
+<h2><a id="Informacin_3"></a>Información</h2>
+<ul>
+<li>Para almacenar la información del clima use boltDB, una base key/value</li>
+</ul>
+<p><a href="https://github.com/boltdb/bolt">https://github.com/boltdb/bolt</a></p>
+<ul>
+<li>Use como httpServer la implementación Gorilla</li>
+</ul>
+<p><a href="https://github.com/gorilla/http">https://github.com/gorilla/http</a></p>
+<ul>
+<li>Para ajustar coordenadas tome presición de 1 decimal, redondeando con Ceil y Floor</li>
+</ul>
+<h2><a id="Frmulas_usadas_14"></a>Fórmulas usadas:</h2>
+<ul>
+<li>Posicion XY dentro del circulo:</li>
+</ul>
+<p><a href="http://www.universoformulas.com/fisica/cinematica/posicion-movimiento-circular/">http://www.universoformulas.com/fisica/cinematica/posicion-movimiento-circular/</a></p>
+<ul>
+<li>Distancia entre puntos:</li>
+</ul>
+<p><a href="https://es.wikihow.com/encontrar-la-distancia-entre-dos-puntos">https://es.wikihow.com/encontrar-la-distancia-entre-dos-puntos</a></p>
+<ul>
+<li>Perímetro del triángulo:</li>
+</ul>
+<p><a href="https://es.wikihow.com/encontrar-el-per%C3%ADmetro-de-un-tri%C3%A1ngulo">https://es.wikihow.com/encontrar-el-perímetro-de-un-triángulo</a></p>
+<ul>
+<li>Puntos alineados:</li>
+</ul>
+<p><a href="https://www.vitutor.com/geo/vec/a_9.html">https://www.vitutor.com/geo/vec/a_9.html</a></p>
+<ul>
+<li>Punto interior en un triángulo:</li>
+</ul>
+<p><a href="http://www.dma.fi.upm.es/personal/mabellanas/tfcs/kirkpatrick/Aplicacion/algoritmos.htm#puntoInteriorAlgoritmo">http://www.dma.fi.upm.es/personal/mabellanas/tfcs/kirkpatrick/Aplicacion/algoritmos.htm#puntoInteriorAlgoritmo</a></p>
+<h2><a id="instalacin_32"></a>instalación</h2>
+<pre><code>cd $GO_HOME/src
+git clone https://github.com/MarianoCaseroML/planetas.git
+</code></pre>
+<h2><a id="compilacin_version_Docker_38"></a>compilación (version Docker)</h2>
+<pre><code>CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o application . 
+</code></pre>
+<h2><a id="APIs_43"></a>APIs</h2>
+<h4><a id="GET_health_45"></a>GET /health</h4>
+<p>Healthcheck</p>
+<pre><code class="language-json">[
+    {
+        "<span class="hljs-attribute">Status</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+    </span>}
+]
+</code></pre>
+<h4><a id="GET_api1regenerarDB_55"></a>GET /api/1/regenerarDB</h4>
+<p>Regenera la base de datos con información de los 10 años</p>
+<pre><code class="language-json">[
+    {
+        "<span class="hljs-attribute">Status</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+    </span>}
+]
+</code></pre>
+<h4><a id="GET_api1climadiaall_65"></a>GET /api/1/clima?dia=all</h4>
+<p>Informacion del clima de todos los dias</p>
+<pre><code class="language-json">[
+    {
+        "<span class="hljs-attribute">dia</span>":<span class="hljs-value"><span class="hljs-number">0</span></span>,
+        "<span class="hljs-attribute">clima</span>":<span class="hljs-value"><span class="hljs-string">"Sequia"</span>
+    </span>},
+    ,{
+        "<span class="hljs-attribute">dia</span>":<span class="hljs-value"><span class="hljs-number">1</span></span>,
+        "<span class="hljs-attribute">clima</span>":<span class="hljs-value"><span class="hljs-string">"Nollueve"</span>
+    </span>}
+]
+</code></pre>
+<h4><a id="GET_api1climadia33_80"></a>GET /api/1/clima?dia=33</h4>
+<p>Informacion del clima de un dia</p>
+<pre><code class="language-json">[
+    {
+        "<span class="hljs-attribute">dia</span>":<span class="hljs-value"><span class="hljs-number">33</span></span>,
+        "<span class="hljs-attribute">clima</span>":<span class="hljs-value"><span class="hljs-string">"Sequia"</span>
+    </span>}
+]
+</code></pre>
+<h4><a id="GET_api1periodoclimasequiaLluviaCondicionesOptimasNollueve_91"></a>GET /api/1/periodo?clima=[sequia|Lluvia|CondicionesOptimas|Nollueve]</h4>
+<p>Informacion de un periodo de clima</p>
+<pre><code class="language-json">[
+    {
+        "<span class="hljs-attribute">periodo</span>":<span class="hljs-value"><span class="hljs-string">"lluvia"</span></span>,
+        "<span class="hljs-attribute">cantidad</span>":<span class="hljs-value"><span class="hljs-number">605</span></span>,
+        "<span class="hljs-attribute">PicoMaximo</span>":<span class="hljs-value"><span class="hljs-number">71</span>
+    </span>}
+]
+</code></pre>
+
+</body></html>
