@@ -10,6 +10,10 @@ https://github.com/boltdb/bolt
 
 https://github.com/gorilla/http
 
+- Use govendor para manejo de dependencias
+
+https://github.com/kardianos/govendor
+
 - Para ajustar coordenadas tome presición de 1 decimal, redondeando con Ceil y Floor.
 
 - Agregue algunas clases de testeo para los principales metodos

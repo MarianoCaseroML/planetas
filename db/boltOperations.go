@@ -1,7 +1,7 @@
 package db
 
 import (
-	"planetas/github.com/boltdb/bolt"
+	"github.com/boltdb/bolt"
 	"fmt"
 	"planetas/entity"
 	"encoding/json"

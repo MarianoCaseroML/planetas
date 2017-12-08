@@ -1,6 +1,6 @@
 <!DOCTYPE html><html><head><meta charset="utf-8"><title>Untitled Document.md</title><script type="text/javascript">
 //<![CDATA[
-window.__cfRocketOptions = {byc:0,p:0,petok:"3a853b157bc9a5a4fd817052bfaa128ff628d975-1512747916-1800"};
+window.__cfRocketOptions = {byc:0,p:0,petok:"2be3b8c2f21b4e4fc3d1fd07dfff78bef02df770-1512763555-1800"};
 //]]>
 </script>
 <script type="text/javascript" src="https://ajax.cloudflare.com/cdn-cgi/scripts/9014afdb/cloudflare-static/rocket.min.js"></script>
@@ -17,6 +17,10 @@ window.__cfRocketOptions = {byc:0,p:0,petok:"3a853b157bc9a5a4fd817052bfaa128ff62
 </ul>
 <p><a href="https://github.com/gorilla/http">https://github.com/gorilla/http</a></p>
 <ul>
+<li>Use govendor para manejo de dependencias</li>
+</ul>
+<p><a href="https://github.com/kardianos/govendor">https://github.com/kardianos/govendor</a></p>
+<ul>
 <li>
 <p>Para ajustar coordenadas tome presición de 1 decimal, redondeando con Ceil y Floor.</p>
 </li>
@@ -30,7 +34,7 @@ window.__cfRocketOptions = {byc:0,p:0,petok:"3a853b157bc9a5a4fd817052bfaa128ff62
 <p>Use Beanstalk para subir el container.</p>
 </li>
 </ul>
-<h2><a id="Frmulas_usadas_20"></a>Fórmulas usadas:</h2>
+<h2><a id="Frmulas_usadas_24"></a>Fórmulas usadas:</h2>
 <ul>
 <li>Posicion XY dentro del circulo:</li>
 </ul>
@@ -51,15 +55,15 @@ window.__cfRocketOptions = {byc:0,p:0,petok:"3a853b157bc9a5a4fd817052bfaa128ff62
 <li>Orientación del triángulo:</li>
 </ul>
 <p><a href="http://www.dma.fi.upm.es/personal/mabellanas/tfcs/kirkpatrick/Aplicacion/algoritmos.htm#puntoInteriorAlgoritmo">http://www.dma.fi.upm.es/personal/mabellanas/tfcs/kirkpatrick/Aplicacion/algoritmos.htm#puntoInteriorAlgoritmo</a></p>
-<h2><a id="instalacin_38"></a>instalación</h2>
+<h2><a id="instalacin_42"></a>instalación</h2>
 <pre><code>cd $GO_HOME/src
 git clone https://github.com/MarianoCaseroML/planetas.git
 </code></pre>
-<h2><a id="compilacin_version_Docker_44"></a>compilación (version Docker)</h2>
+<h2><a id="compilacin_version_Docker_48"></a>compilación (version Docker)</h2>
 <pre><code>CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o application . 
 </code></pre>
-<h2><a id="APIs_49"></a>APIs</h2>
-<h4><a id="GET_health_51"></a>GET /health</h4>
+<h2><a id="APIs_53"></a>APIs</h2>
+<h4><a id="GET_health_55"></a>GET /health</h4>
 <p>Healthcheck</p>
 <pre><code class="language-json">[
     {
@@ -67,7 +71,7 @@ git clone https://github.com/MarianoCaseroML/planetas.git
     </span>}
 ]
 </code></pre>
-<h4><a id="GET_api1regenerarDB_61"></a>GET /api/1/regenerarDB</h4>
+<h4><a id="GET_api1regenerarDB_65"></a>GET /api/1/regenerarDB</h4>
 <p>Regenera la base de datos con información de los 10 años</p>
 <pre><code class="language-json">[
     {
@@ -75,7 +79,7 @@ git clone https://github.com/MarianoCaseroML/planetas.git
     </span>}
 ]
 </code></pre>
-<h4><a id="GET_api1climadiaall_71"></a>GET /api/1/clima?dia=all</h4>
+<h4><a id="GET_api1climadiaall_75"></a>GET /api/1/clima?dia=all</h4>
 <p>Informacion del clima de todos los dias</p>
 <pre><code class="language-json">[
     {
@@ -88,7 +92,7 @@ git clone https://github.com/MarianoCaseroML/planetas.git
     </span>}
 ]
 </code></pre>
-<h4><a id="GET_api1climadia33_86"></a>GET /api/1/clima?dia=33</h4>
+<h4><a id="GET_api1climadia33_90"></a>GET /api/1/clima?dia=33</h4>
 <p>Informacion del clima de un dia</p>
 <pre><code class="language-json">[
     {
@@ -97,7 +101,7 @@ git clone https://github.com/MarianoCaseroML/planetas.git
     </span>}
 ]
 </code></pre>
-<h4><a id="GET_api1periodoclimasequiaLluviaCondicionesOptimasNollueve_97"></a>GET /api/1/periodo?clima=[sequia|Lluvia|CondicionesOptimas|Nollueve]</h4>
+<h4><a id="GET_api1periodoclimasequiaLluviaCondicionesOptimasNollueve_101"></a>GET /api/1/periodo?clima=[sequia|Lluvia|CondicionesOptimas|Nollueve]</h4>
 <p>Informacion de un periodo de clima</p>
 <pre><code class="language-json">[
     {

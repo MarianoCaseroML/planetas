@@ -2,9 +2,7 @@ package controllers
 
 import (
 	"net/http"
-	//"planetas/entity"
-	//"encoding/json"
-	"planetas/github.com/gorilla/mux"
+	"github.com/gorilla/mux"
 	"log"
 	"planetas/server"
 	"planetas/utils"
