@@ -6,6 +6,7 @@ import (
 	"log"
 	"planetas/server"
 	"planetas/utils"
+	"fmt"
 )
 
 const serverPort string = "8080"
@@ -54,7 +55,8 @@ func registrarRutas(router *mux.Router) {
 
 	//Converti el readme a html para servirlo como pagina statica y mostrar "algo" cuando se accede al servicio
 	wf := utils.CurrentWF()
-	router.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir(wf + "/static/"))))
+	fmt.Println(wf)
+	router.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir(wf + "/planetas/static/"))))
 
 }
 
