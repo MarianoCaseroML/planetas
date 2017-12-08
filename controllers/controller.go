@@ -4,7 +4,7 @@ import (
 	"net/http"
 	//"planetas/entity"
 	//"encoding/json"
-	"planetas/external/github.com/gorilla/mux"
+	"planetas/github.com/gorilla/mux"
 	"log"
 	"planetas/server"
 	"planetas/utils"

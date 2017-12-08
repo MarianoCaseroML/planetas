@@ -2,7 +2,7 @@ package server
 
 import (
 	"log"
-	"planetas/external/github.com/boltdb/bolt"
+	"planetas/github.com/boltdb/bolt"
 	"encoding/json"
 	"strconv"
 	"planetas/entity"
