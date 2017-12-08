@@ -7,14 +7,16 @@ import (
 	"encoding/json"
 	"strings"
 	"strconv"
+	"planetas/utils"
 )
 
 var BucketName = string ("galaxy")
-const dbPath = "bolt.db"
-
+const dbName = "bolt.db"
 
 func InitBolt () (*bolt.DB)  {
-	db, err := bolt.Open(dbPath, 0600, nil)
+	//obtengo el wf para grabar la base en el mismo directorio
+	wf := utils.CurrentWF()
+	db, err := bolt.Open(wf + dbName, 0600, nil)
 	if (err != nil) {
 		//este error cierra todo
 		panic(err)

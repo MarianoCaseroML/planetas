@@ -19,6 +19,8 @@ var Betasoide entity.Planeta
 var Vulcano entity.Planeta
 var Sol entity.Planeta
 
+
+//Inicializo los planetas segun los datos el ejercicio
 func inicializarPlanetas () {
 
 	Ferengi.Velocidad = 1
@@ -38,6 +40,7 @@ func inicializarPlanetas () {
 	Sol.Sentido = 0
 }
 
+//Para ejecutar al inicio, si la base no existe la creo cuando se inicia
 func CrearBaseSiNoExiste() {
 	if (!db.CheckExistsBucket()) {
 		log.Println("Regenerando....")
@@ -45,6 +48,7 @@ func CrearBaseSiNoExiste() {
 	}
 }
 
+//Genero la base datos con toda la info de todos los dias
 func RegenerarBase() {
 	//Abro la base
 	dataBase := db.InitBolt()
@@ -53,12 +57,63 @@ func RegenerarBase() {
 	//Creo los planetas con sus datos
 	inicializarPlanetas()
 
+	//por cada dia llamo a la funcion para generar los datos, hago los calculos y grabo en la base
 	for dia := 0; dia <= cantidadDiasModelo; dia++ {
 		log.Println("Generando dia: ", dia)
 		generarDia(dataBase, dia)
 	}
 }
 
+//genero la informacion para un dia especifico
+func generarDia (dataBase *bolt.DB ,dia int) {
+
+	//calculo la posicion de cada planeta para cada dia
+	Betasoide.CalcularPosicionXY(dia)
+	Vulcano.CalcularPosicionXY(dia)
+	Ferengi.CalcularPosicionXY(dia)
+
+	//Todos los calculos matematicos
+	if (mathCalcs.EstanAlineados(Betasoide, Vulcano, Ferengi)) {
+		if (mathCalcs.ElSolTambienEstaAlineado(Betasoide, Vulcano, Ferengi, Sol)) {
+			//Sequia
+			grabarDatos(dataBase, dia, entity.Sequia, 0)
+		} else {
+			//CondicionesOptimas
+			grabarDatos(dataBase, dia, entity.Optimo, 0)
+		}
+	} else { //hay triangulo
+		//calculo el perimetro del triangulo para saber cuando es el mas grande
+		perimetroTriangulo := mathCalcs.PerimetroTriangulo(Vulcano, Ferengi, Betasoide)
+		if (mathCalcs.ElSolEstaEnMedioDelTriagulo(Betasoide, Vulcano, Ferengi, Sol)) {
+			//Luvia
+			grabarDatos(dataBase, dia, entity.Lluvia, perimetroTriangulo)
+		} else {
+			//NoLlueve
+			grabarDatos(dataBase, dia, entity.NoLluvia, perimetroTriangulo)
+		}
+	}
+}
+
+//Grabo datos en la base
+func grabarDatos (dataBase *bolt.DB, dia int, tipoClima string, perimetro float64) error {
+
+	//Paso el dia a int para usarlo como key
+	var s string = strconv.Itoa(dia)
+
+	//genero la entidad para grabar el la base
+	var values = entity.Clima{dia, tipoClima, perimetro}
+
+	encoded, err := json.Marshal(values)
+	if err != nil {
+		return err
+	}
+	//guardo estructura
+	err = db.Put(dataBase, []byte(s), encoded)
+	return  err
+}
+
+//para consultar el clima para un dia especifico
+//agregue una opcion para devolver un array con la info de todos los dias
 func ClimaPorDia (dia string) [] byte {
 
 	//Abro la base
@@ -85,6 +140,7 @@ func ClimaPorDia (dia string) [] byte {
 	}
 }
 
+//Para consultar por un tipo de clima especifico
 func ClimaPorPeriodo (climaBuscado string) [] byte {
 	//Abro la base
 	dataBase := db.InitBolt()
@@ -113,50 +169,4 @@ func ClimaPorPeriodo (climaBuscado string) [] byte {
 		return response
 	}
 
-}
-
-
-func generarDia (dataBase *bolt.DB ,dia int) {
-
-	//calculo la posicion de cada planeta para cada dia
-	Betasoide.CalcularPosicionXY(dia)
-	Vulcano.CalcularPosicionXY(dia)
-	Ferengi.CalcularPosicionXY(dia)
-
-	if (mathCalcs.EstanAlineados(Betasoide, Vulcano, Ferengi)) {
-		if (mathCalcs.ElSolTambienEstaAlineado(Betasoide, Vulcano, Ferengi, Sol)) {
-			//Sequia
-			//storeData(dataBase, dia, entity.TipoClima(entity.Sequia), 0)
-			grabarDatos(dataBase, dia, entity.Sequia, 0)
-		} else {
-			//CondicionesOptimas
-			grabarDatos(dataBase, dia, entity.Optimo, 0)
-		}
-	} else { //hay triangulo
-		//calculo el perimetro del triangulo para saber cuando es el mas grande
-		perimetroTriangulo := mathCalcs.PerimetroTriangulo(Vulcano, Ferengi, Betasoide)
-		if (mathCalcs.ElSolEstaEnMedioDelTriagulo(Betasoide, Vulcano, Ferengi, Sol)) {
-			//Luvia
-			grabarDatos(dataBase, dia, entity.Lluvia, perimetroTriangulo)
-		} else {
-			//NoLlueve
-			grabarDatos(dataBase, dia, entity.NoLluvia, perimetroTriangulo)
-		}
-	}
-}
-
-//Grabo datos en la base
-func grabarDatos (dataBase *bolt.DB, dia int, tipoClima string, perimetro float64) error {
-
-	//Paso el dia a int para usarlo como key
-	var s string = strconv.Itoa(dia)
-	var values = entity.Clima{dia, tipoClima, perimetro}
-
-	encoded, err := json.Marshal(values)
-	if err != nil {
-		return err
-	}
-	//guardo estructura
-	err = db.Put(dataBase, []byte(s), encoded)
-	return  err
 }

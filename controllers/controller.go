@@ -7,8 +7,7 @@ import (
 	"planetas/external/github.com/gorilla/mux"
 	"log"
 	"planetas/server"
-	"path/filepath"
-	"os"
+	"planetas/utils"
 )
 
 const serverPort string = "8080"
@@ -55,14 +54,13 @@ func registrarRutas(router *mux.Router) {
 	//Consulta por periodo de clima
 	router.Path(periodo).Methods("GET").HandlerFunc(consultaPorPeriodo)
 
-	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
-	if err != nil {
-		log.Fatal(err)
-	}
-	router.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir(dir + "/static/"))))
+	//Converti el readme a html para servirlo como pagina statica y mostrar "algo" cuando se accede al servicio
+	wf := utils.CurrentWF()
+	router.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir(wf + "/static/"))))
 
 }
 
+//para crear/regenerar la base
 func RecrearDB(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	server.RegenerarBase()

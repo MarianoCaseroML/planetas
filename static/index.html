@@ -1,9 +1,9 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title>Mariano Casero - Examen</title><script type="text/javascript">
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Untitled Document.md</title><script type="text/javascript">
 //<![CDATA[
-window.__cfRocketOptions = {byc:0,p:0,petok:"32684e3ae60fc221a8b0d55688018e936b35e5d0-1512623486-1800"};
+window.__cfRocketOptions = {byc:0,p:0,petok:"3a853b157bc9a5a4fd817052bfaa128ff628d975-1512747916-1800"};
 //]]>
 </script>
-<script type="text/javascript" src="https://ajax.cloudflare.com/cdn-cgi/scripts/ddc5a536/cloudflare-static/rocket.min.js"></script>
+<script type="text/javascript" src="https://ajax.cloudflare.com/cdn-cgi/scripts/9014afdb/cloudflare-static/rocket.min.js"></script>
 <style></style></head><body id="preview">
 <h1><a id="Examen_ML_0"></a>Examen ML</h1>
 <p>Mariano Casero</p>
@@ -17,9 +17,20 @@ window.__cfRocketOptions = {byc:0,p:0,petok:"32684e3ae60fc221a8b0d55688018e936b3
 </ul>
 <p><a href="https://github.com/gorilla/http">https://github.com/gorilla/http</a></p>
 <ul>
-<li>Para ajustar coordenadas tome presición de 1 decimal, redondeando con Ceil y Floor</li>
+<li>
+<p>Para ajustar coordenadas tome presición de 1 decimal, redondeando con Ceil y Floor.</p>
+</li>
+<li>
+<p>Agregue algunas clases de testeo para los principales metodos</p>
+</li>
+<li>
+<p>Se incluye un Dockerfile con el que se creo el container.</p>
+</li>
+<li>
+<p>Use Beanstalk para subir el container.</p>
+</li>
 </ul>
-<h2><a id="Frmulas_usadas_14"></a>Fórmulas usadas:</h2>
+<h2><a id="Frmulas_usadas_20"></a>Fórmulas usadas:</h2>
 <ul>
 <li>Posicion XY dentro del circulo:</li>
 </ul>
@@ -37,18 +48,18 @@ window.__cfRocketOptions = {byc:0,p:0,petok:"32684e3ae60fc221a8b0d55688018e936b3
 </ul>
 <p><a href="https://www.vitutor.com/geo/vec/a_9.html">https://www.vitutor.com/geo/vec/a_9.html</a></p>
 <ul>
-<li>Punto interior en un triángulo:</li>
+<li>Orientación del triángulo:</li>
 </ul>
 <p><a href="http://www.dma.fi.upm.es/personal/mabellanas/tfcs/kirkpatrick/Aplicacion/algoritmos.htm#puntoInteriorAlgoritmo">http://www.dma.fi.upm.es/personal/mabellanas/tfcs/kirkpatrick/Aplicacion/algoritmos.htm#puntoInteriorAlgoritmo</a></p>
-<h2><a id="instalacin_32"></a>instalación</h2>
+<h2><a id="instalacin_38"></a>instalación</h2>
 <pre><code>cd $GO_HOME/src
 git clone https://github.com/MarianoCaseroML/planetas.git
 </code></pre>
-<h2><a id="compilacin_version_Docker_38"></a>compilación (version Docker)</h2>
+<h2><a id="compilacin_version_Docker_44"></a>compilación (version Docker)</h2>
 <pre><code>CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o application . 
 </code></pre>
-<h2><a id="APIs_43"></a>APIs</h2>
-<h4><a id="GET_health_45"></a>GET /health</h4>
+<h2><a id="APIs_49"></a>APIs</h2>
+<h4><a id="GET_health_51"></a>GET /health</h4>
 <p>Healthcheck</p>
 <pre><code class="language-json">[
     {
@@ -56,7 +67,7 @@ git clone https://github.com/MarianoCaseroML/planetas.git
     </span>}
 ]
 </code></pre>
-<h4><a id="GET_api1regenerarDB_55"></a>GET /api/1/regenerarDB</h4>
+<h4><a id="GET_api1regenerarDB_61"></a>GET /api/1/regenerarDB</h4>
 <p>Regenera la base de datos con información de los 10 años</p>
 <pre><code class="language-json">[
     {
@@ -64,7 +75,7 @@ git clone https://github.com/MarianoCaseroML/planetas.git
     </span>}
 ]
 </code></pre>
-<h4><a id="GET_api1climadiaall_65"></a>GET /api/1/clima?dia=all</h4>
+<h4><a id="GET_api1climadiaall_71"></a>GET /api/1/clima?dia=all</h4>
 <p>Informacion del clima de todos los dias</p>
 <pre><code class="language-json">[
     {
@@ -77,7 +88,7 @@ git clone https://github.com/MarianoCaseroML/planetas.git
     </span>}
 ]
 </code></pre>
-<h4><a id="GET_api1climadia33_80"></a>GET /api/1/clima?dia=33</h4>
+<h4><a id="GET_api1climadia33_86"></a>GET /api/1/clima?dia=33</h4>
 <p>Informacion del clima de un dia</p>
 <pre><code class="language-json">[
     {
@@ -86,7 +97,7 @@ git clone https://github.com/MarianoCaseroML/planetas.git
     </span>}
 ]
 </code></pre>
-<h4><a id="GET_api1periodoclimasequiaLluviaCondicionesOptimasNollueve_91"></a>GET /api/1/periodo?clima=[sequia|Lluvia|CondicionesOptimas|Nollueve]</h4>
+<h4><a id="GET_api1periodoclimasequiaLluviaCondicionesOptimasNollueve_97"></a>GET /api/1/periodo?clima=[sequia|Lluvia|CondicionesOptimas|Nollueve]</h4>
 <p>Informacion de un periodo de clima</p>
 <pre><code class="language-json">[
     {

@@ -10,7 +10,13 @@ https://github.com/boltdb/bolt
 
 https://github.com/gorilla/http
 
-- Para ajustar coordenadas tome presición de 1 decimal, redondeando con Ceil y Floor
+- Para ajustar coordenadas tome presición de 1 decimal, redondeando con Ceil y Floor.
+
+- Agregue algunas clases de testeo para los principales metodos
+
+- Se incluye un Dockerfile con el que se creo el container.
+
+- Use Beanstalk para subir el container.
 
 ## Fórmulas usadas:
 - Posicion XY dentro del circulo:
@@ -25,7 +31,7 @@ https://es.wikihow.com/encontrar-el-per%C3%ADmetro-de-un-tri%C3%A1ngulo
 - Puntos alineados:
 
 https://www.vitutor.com/geo/vec/a_9.html
-- Punto interior en un triángulo:
+- Orientación del triángulo:
 
 http://www.dma.fi.upm.es/personal/mabellanas/tfcs/kirkpatrick/Aplicacion/algoritmos.htm#puntoInteriorAlgoritmo
 
